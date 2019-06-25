@@ -1,0 +1,8 @@
+{
+  "name": "react-google-cse",
+  "version": "1.0.0",
+  "description": "Add Google Custom Search v1 to your react app.",
+  "main": "index.js",
+  "author": "Freddie Mixell",
+  "license": "MIT"
+}

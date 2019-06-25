@@ -1,0 +1,93 @@
+<!-- Desktop Search Box Nav -->
+<div class="google-cse-search-box" id="google-cse">
+  <a id="google-cse-search-toggle-off" style="margin: 0;">Back</a>
+  <form id="google-search-form" method="post" action="">
+    <input id="google-cse-search" placeholder="Search..." required type="text" />
+    <button class="google-cse-submit" id="google-cse-submit">Search</button>
+  </form>
+</div>
+
+<!--
+ Google CSE Search Results
+ Display and paginate up to 100 search results per query.
+ -->
+<div class="google-wrapper">
+  <div id="google-controls">
+    <p id="google-total-results"></p>
+    <input id="google-search-input" type="text" placeholder="Search..." />
+  </div>
+  <div id="google-results"></div>
+  <div id="google-pagination"></div>
+</div>
+
+<script>
+  // Type GoogleSearch into the console to see all methods and props of GoogleCSE.
+  // Debugging: Uncomment line below and remove const from GoogleSeach to debug in console.
+  var GoogleSearch;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Checking to see if our Class GoogleCSE is available
+    if (typeof GoogleCSE !== "undefined") {
+
+      // Search Engine ID: https://cse.google.com/cse/
+      const cx = "{{ search_engine_id }}";
+      // API KEYS ON DIFFERENT SITE
+      // https://code.google.com/apis/console/?pli=1
+      // Enable Custom Search API for your api key
+      // Make sure you set your rules with *
+      // localhost:4000/*, *.netlify.com/*, yourwebsite.com/*
+      const apiKey = "{{ api_key }}";
+
+      // New Instance of Site Search
+      // Any styling changes can be done within the _render method
+      GoogleSearch = new GoogleCSE({ apiKey, cx });
+
+      // Error sent from class if cx and apiKey aren't getting passed
+      if (GoogleSearch.invalid) {
+        console.warn("Pass API Key and Search Engine ID");
+        return;
+      }
+
+      // Check for query params and pass them to state.
+      // Set state calls render so we won't need to
+      const params = new URLSearchParams(window.location.search);
+
+      if (params.get("q") !== null) {
+        GoogleSearch._searchSite(params.get("q"));
+        document.getElementById("google-search-input").value = params.get("q");
+      } else {
+        // No params? Render the page.
+        GoogleSearch._render();
+      }
+
+      // Search Results Page Input
+      const searchInput = document.querySelector("#google-search-input");
+
+      if (searchInput === null || !searchInput) {
+        return;
+      }
+
+      // Making sure debouce is included in _helpers.js
+      if (typeof debounce !== "function") {
+        console.warn("Add debounce to _assets/js/libs/_helpers.js");
+        console.warn("https://davidwalsh.name/javascript-debounce-function");
+        return;
+      }
+
+      /**
+       * Search Input Event Handler.
+       * This function handles searchs on the results page.
+       *
+       * Function's wrapped in debounce for performance.
+       *
+       * @param {Object} event
+       */
+
+      searchInput.addEventListener("input", debounce(function (event) {
+        GoogleSearch._searchSite(event.target.value);
+        return;
+      }, 250));
+    }
+    return;
+  });
+</script>
