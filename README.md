@@ -21,19 +21,19 @@ const apiKey = "API_KEY_HERE";
 const cx = "SEARCH_ENGINE_ID_HERE";
 
 // GoogleSearch variable is now an instance of GoogleCSE
+
 const GoogleSearch = new GoogleCSE({ apiKey, cx });
 
 // Possible search query
+
 var searchQuery = "Dank Memes";
 
 // Pass our query
+
 GoogleSearch._searchSite(searchQuery);
 
 // Rendered Results will look for the following markup
-<!--
- Google CSE Search Results
- Display and paginate up to 100 search results per query.
- -->
+
 <div class="google-wrapper">
   <div id="google-controls">
     <p id="google-total-results"></p>
