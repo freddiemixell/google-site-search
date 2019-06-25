@@ -17,7 +17,6 @@ Use and instance of the GoogleCSE function to search your site. This is using va
 
 6. Initialize Your Search:
 
-`
 const apiKey = "API_KEY_HERE";
 const cx = "SEARCH_ENGINE_ID_HERE";
 
@@ -43,4 +42,3 @@ GoogleSearch._searchSite(searchQuery);
   <div id="google-results"></div>
   <div id="google-pagination"></div>
 </div>
-`
