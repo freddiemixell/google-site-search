@@ -1,5 +1,5 @@
 # google-site-search
-##Search your site with Google Custom Search Engine v1
+## Search your site with Google Custom Search Engine v1
 
 Use and instance of the GoogleCSE function to search your site. This is using vanilla javascript but is still a work in progress. If using this in a production environment make sure you're running everything through Babel.
 
